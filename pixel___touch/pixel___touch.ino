@@ -10,9 +10,9 @@ int buttonState = 0;
 int a = 0;
 int b = 0;
 int c = 0;
-int x1 = 85;
+int x1 = 255;
 int x2 = 0;
-int x3 = 170;
+int x3 = 255;
 int x4 = 0;
 int x5 = 255;
 int x6 = 0;
@@ -69,7 +69,7 @@ void loop() {
         a = (x1 + x2) - a;
         Serial.print(i); Serial.println(" touched");
         for (int i = 0; i < 16; i++) {
-          pixels.setPixelColor(i, pixels.Color(a, a, a));
+          pixels.setPixelColor(i, pixels.Color(a, 0, 0));
           pixels.show();
         }
       }
@@ -82,7 +82,7 @@ void loop() {
         b = (x1 + x2) - b;
         Serial.print(i); Serial.println(" touched");
         for (int i = 0; i < 16; i++) {
-          pixels.setPixelColor(i, pixels.Color(b, b, b));
+          pixels.setPixelColor(i, pixels.Color(0, b, 0));
           pixels.show();
         }
       }
@@ -95,7 +95,7 @@ void loop() {
         c = (x5 + x6) - c;
         Serial.print(i); Serial.println(" touched");
         for (int i = 0; i < 16; i++) {
-          pixels.setPixelColor(i, pixels.Color(c, c, c));
+          pixels.setPixelColor(i, pixels.Color(0, 0, c));
           pixels.show();
         }
       }
