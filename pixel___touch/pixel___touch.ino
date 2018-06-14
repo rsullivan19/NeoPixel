@@ -2,7 +2,7 @@
 #ifdef __AVR__
 #include <avr/power.h>
 #endif
-#define PIN            6
+#define PIN            8
 #define NUMPIXELS      16
 
 boolean on = true;
@@ -62,40 +62,40 @@ void setup() {
 void loop() {
 
   currtouched = cap.touched();
-  if (cap.touched() & (1 << 2)) {
+  if (cap.touched() & (1 << 8)) {
     for (uint8_t i = 0; i < 16; i++) {
       // it if *is* touched and *wasnt* touched before, alert!
       if ((currtouched & _BV(i)) && !(lasttouched & _BV(i)) ) {
         a = (x1 + x2) - a;
         Serial.print(i); Serial.println(" touched");
         for (int i = 0; i < 16; i++) {
-          pixels.setPixelColor(i, pixels.Color(a, 0, 0));
+          pixels.setPixelColor(i, pixels.Color(a, b, c));
           pixels.show();
         }
       }
     }
   }
-  if (cap.touched() & (1 << 4)) {
+  if (cap.touched() & (1 << 6)) {
     for (uint8_t i = 0; i < 16; i++) {
       // it if *is* touched and *wasnt* touched before, alert!
       if ((currtouched & _BV(i)) && !(lasttouched & _BV(i)) ) {
-        b = (x1 + x2) - b;
+        b = (x3 + x4) - b;
         Serial.print(i); Serial.println(" touched");
         for (int i = 0; i < 16; i++) {
-          pixels.setPixelColor(i, pixels.Color(0, b, 0));
+          pixels.setPixelColor(i, pixels.Color(a, b, c));
           pixels.show();
         }
       }
     }
   }
-    if (cap.touched() & (1 << 6)) {
+    if (cap.touched() & (1 << 4)) {
     for (uint8_t i = 0; i < 16; i++) {
       // it if *is* touched and *wasnt* touched before, alert!
       if ((currtouched & _BV(i)) && !(lasttouched & _BV(i)) ) {
         c = (x5 + x6) - c;
         Serial.print(i); Serial.println(" touched");
         for (int i = 0; i < 16; i++) {
-          pixels.setPixelColor(i, pixels.Color(0, 0, c));
+          pixels.setPixelColor(i, pixels.Color(a, b, c));
           pixels.show();
         }
       }
@@ -121,5 +121,5 @@ void loop() {
   Serial.println();
 
   // put a delay so it isn't overwhelming
-  delay(100);
+  delay(1000);
 }
